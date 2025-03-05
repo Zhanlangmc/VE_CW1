@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8421705f7dae64542a96a76f4ed82440
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 179910
+  packageName: ATART Monster Slime
+  packageVersion: 1.0
+  assetPath: Assets/ATART/MonsterVol.1/Slime/Slime.playable
+  uploadId: 436168

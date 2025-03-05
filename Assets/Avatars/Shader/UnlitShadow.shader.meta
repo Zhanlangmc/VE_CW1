@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: eadb82cd09299bf40b4decb38a46aefe
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 179910
+  packageName: ATART Monster Slime
+  packageVersion: 1.0
+  assetPath: Assets/ATART/Shader/UnlitShadow.shader
+  uploadId: 436168
