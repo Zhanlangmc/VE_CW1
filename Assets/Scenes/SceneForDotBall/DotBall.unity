@@ -804,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 349813798}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.984, y: 4.058, z: 4.504}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1522,75 +1522,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3046147365443362019, guid: a0a878f902f347242a034838ad481be3, type: 3}
   m_PrefabInstance: {fileID: 519261039}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &520581926
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 232896285866743352, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_Name
-      value: DogeBall
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.409
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.106
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2913073205305413554, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
 --- !u!64 &618788515
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4345,7 +4276,7 @@ Transform:
   m_GameObject: {fileID: 1446726775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.578, y: 5.201, z: 6.608}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4366,6 +4297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 232896285866743352, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
   spawnInterval: 5
+  destoryInterval: 5
 --- !u!1001 &1452884453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6124,4 +6056,3 @@ SceneRoots:
   - {fileID: 831117213}
   - {fileID: 704008525}
   - {fileID: 1985597547}
-  - {fileID: 520581926}
