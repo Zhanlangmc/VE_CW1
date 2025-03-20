@@ -101,7 +101,7 @@ Material:
     - _BUILTIN_ZTest: 4
     - _BUILTIN_ZWrite: 1
     - _BUILTIN_ZWriteControl: 0
-    - _Blend: 0
+    - _Blend: 2
     - _BlendModePreserveSpecular: 0
     - _BumpScale: 1
     - _CastShadows: 1
@@ -111,8 +111,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
-    - _DstBlendAlpha: 10
+    - _DstBlend: 1
+    - _DstBlendAlpha: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -124,7 +124,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
@@ -136,8 +136,8 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.12156863}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.12156863}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.03529412}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.03529412}
     - _EdgeColor: {r: 1, g: 1, b: 1, a: 0.2627451}
     - _EdgeData: {r: 0, g: 0.85, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
