@@ -13,4 +13,14 @@ MonoBehaviour:
   m_Name: DogeBallSpawn
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 232896285866743352, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
+  - {fileID: 4816721914606352166, guid: 26770f71bc73bfc48977b91a0689fc1d, type: 3}
+  - {fileID: 388876489497171537, guid: 9cf875d00d080ef4788995849d0056e7, type: 3}
+  - {fileID: 2230530226155236490, guid: e5e9e7b5ec944db4597ad58e3ac0e9de, type: 3}
+  - {fileID: 2369809154076360387, guid: f1288c2b16f16ec428e090d85c8b80e3, type: 3}
+  - {fileID: 4333536560383591219, guid: ead6273727accab4bac4b88029bb87cc, type: 3}
+  - {fileID: 3828846876288801734, guid: f5fbe6901ab6edf4eb2100fc87d065b9, type: 3}
+  - {fileID: 5987858285101769375, guid: 2caf0135505e7e5469f9e61aebf59b8f, type: 3}
+  - {fileID: 279354611227255268, guid: 4d4eb42d538870d468d854643425d532, type: 3}
+  - {fileID: 5071555915851589694, guid: e412e7a98d368c44f8aa641d62c18694, type: 3}
+  - {fileID: 3388152910422019967, guid: e957d5a0653c69a49aa6ea15ff4e8210, type: 3}
+  - {fileID: 5175267955941368727, guid: 680f5ad1738163142a6aa91d8ec67334, type: 3}

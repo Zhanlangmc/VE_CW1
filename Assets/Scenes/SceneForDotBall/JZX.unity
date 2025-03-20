@@ -4757,6 +4757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1446726776}
   - component: {fileID: 1446726777}
+  - component: {fileID: 1446726778}
   m_Layer: 0
   m_Name: DogeBallSpawner
   m_TagString: Untagged
@@ -4787,14 +4788,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446726775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5903648dbb10e6499abbd2029030681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 232896285866743352, guid: 87d7cc5178540dc4c962dfc5a628bcf7, type: 3}
-  spawnInterval: 5
-  destoryInterval: 5
+  spawnInterval: 3
+  destoryInterval: 7
+--- !u!114 &1446726778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446726775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d442c6a84aacf1846b3e102f4c446894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInterval: 3
+  destoryInterval: 7
+  catalogue: {fileID: 11400000, guid: e9a48dfce4334474087a402a3282e30f, type: 2}
 --- !u!1001 &1452884453
 PrefabInstance:
   m_ObjectHideFlags: 0
