@@ -16,7 +16,7 @@ public class ScoreUI : MonoBehaviour
         }
 
         // selfcheck `Text (Legacy)`
-        scoreText = GameObject.Find("Text (Legacy)")?.GetComponent<Text>();
+        
         if (scoreText == null)
         {
             Debug.LogError("Legacy UI Text element not found! Make sure it exists in the UI.");
