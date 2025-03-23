@@ -26,6 +26,8 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     [SerializeField] private float throwingForce = 1.5f; // 投掷力度
     private float destroyTime;
 
+    public NetworkId ownerId;
+
     private struct Message
     {
         public Pose pose;
@@ -90,6 +92,43 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         isFlyingToHand = false;
         rb.isKinematic = false; // 重新启用物理
 
+        //Transform interactorTransform = eventArgs.interactorObject.transform;
+        //Debug.Log("Interactor Object: " + interactorTransform.name);
+        //Debug.Log("Parent chain:");
+        //Transform current = interactorTransform;
+        //while (current != null)
+        //{
+        //    Debug.Log(" - " + current.name);
+        //    current = current.parent;
+        //}
+
+        //if (PlayerSetup.LocalPlayerScore != null)
+        //{
+        //    ownerId = PlayerSetup.LocalPlayerScore.NetworkId;
+        //    Debug.Log($"Setting ball ownerId to: {ownerId}");
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("PlayerSetup.LocalPlayerScore is null, ownerId not set.");
+        //}
+        Score shooterScore = eventArgs.interactorObject.transform.GetComponentInParent<Score>();
+        if (shooterScore != null)
+        {
+            ownerId = shooterScore.NetworkId;
+            Debug.Log($"Setting ball ownerId to: {ownerId}");
+        }
+        else
+        {
+            Debug.LogError("No Score component found on shooter!");
+        }
+
+        Transform current = eventArgs.interactorObject.transform;
+        while (current != null)
+        {
+            Debug.Log("Parent: " + current.name);
+            current = current.parent;
+        }
+
         Rigidbody handRb = eventArgs.interactorObject.transform.GetComponent<Rigidbody>();
         if (handRb != null)
         {
@@ -129,6 +168,36 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
             }
         }
     }
+
+    // 在 Dodgeball 中添加
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 将原有 Ball 的碰撞逻辑复制到这里
+        if (collision.collider.CompareTag("Player"))
+        {
+            Score hitScore = collision.collider.GetComponentInParent<Score>();
+            if (hitScore != null)
+            {
+                Debug.Log($"Ball ownerId: {ownerId}");
+                Debug.Log($"Hit player's Score.NetworkId: {hitScore.NetworkId}");
+
+                if (hitScore.NetworkId != ownerId)
+                {
+                    Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
+                    if (shooterScore == null)
+                    {
+                        Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
+                    }
+                    else
+                    {
+                        shooterScore.AddScore(1);
+                    }
+                }
+            }
+            Destroy(gameObject);
+        }
+    }
+
 
     private void SendMessage()
     {

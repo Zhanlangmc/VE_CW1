@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3188138088755566101}
   - component: {fileID: 1270692697437530527}
   - component: {fileID: 6714251300913587744}
+  - component: {fileID: -88442188005012675}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Ball
@@ -252,6 +253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingForce: 1.5
+  ownerId:
+    a: 0
+    b: 0
 --- !u!64 &6714251300913587744
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -274,3 +278,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7682724294687611154, guid: 0dea975dd1211a249a51235128b881d6, type: 3}
+--- !u!114 &-88442188005012675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279354611227255268}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId:
+    a: 0
+    b: 0

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2606417771742289594}
   - component: {fileID: -8702110281291938783}
   - component: {fileID: -5005930066012148525}
+  - component: {fileID: 3175065688124777194}
   m_Layer: 0
   m_Name: Watermelon
   m_TagString: Ball
@@ -252,6 +253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingForce: 1.5
+  ownerId:
+    a: 0
+    b: 0
 --- !u!64 &-5005930066012148525
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -274,3 +278,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3500872997411817233, guid: 87f1d3e1f881742479c0f30526ecf0e4, type: 3}
+--- !u!114 &3175065688124777194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175267955941368727}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId:
+    a: 0
+    b: 0

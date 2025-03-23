@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7891950600224045306}
   - component: {fileID: -2430659036630487409}
   - component: {fileID: 7234088619745837630}
+  - component: {fileID: -8886475023191905515}
   m_Layer: 0
   m_Name: Pumpkin
   m_TagString: Ball
@@ -252,6 +253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingForce: 1.5
+  ownerId:
+    a: 0
+    b: 0
 --- !u!64 &7234088619745837630
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -274,3 +278,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3339082285309697363, guid: 01a647d07ea2c9544a4ebba6208c2ed3, type: 3}
+--- !u!114 &-8886475023191905515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5071555915851589694}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId:
+    a: 0
+    b: 0

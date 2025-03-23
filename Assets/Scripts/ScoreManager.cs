@@ -26,6 +26,7 @@ public class ScoreManager : MonoBehaviour
         if (!scoreDictionary.ContainsKey(score.NetworkId))
         {
             scoreDictionary.Add(score.NetworkId, score);
+            Debug.Log($"Registered Score for {score.gameObject.name} with NetworkId: {score.NetworkId}");
         }
     }
 
