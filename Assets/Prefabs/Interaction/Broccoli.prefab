@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -7326957972539061731}
   - component: {fileID: 8561267928803049520}
   - component: {fileID: -1524850519664478564}
-  - component: {fileID: -5702567088741656658}
   m_Layer: 0
   m_Name: Broccoli
   m_TagString: Ball
@@ -278,18 +277,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5187337210543371682, guid: 6f41ced50b4be084786971caeec1f413, type: 3}
---- !u!114 &-5702567088741656658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2369809154076360387}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId:
-    a: 0
-    b: 0

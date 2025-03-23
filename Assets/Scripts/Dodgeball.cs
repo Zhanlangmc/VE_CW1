@@ -125,7 +125,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         Transform current = eventArgs.interactorObject.transform;
         while (current != null)
         {
-            Debug.Log("Parent: " + current.name);
+            // Debug.Log("Parent: " + current.name);
             current = current.parent;
         }
 

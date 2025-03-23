@@ -20,6 +20,7 @@ public class PlayerSetup : MonoBehaviour
         {
             LocalPlayerScore = score;
         }
+
         // 查找玩家的主摄像机（可以根据你的场景结构做调整）
         Camera playerCamera = GetComponentInChildren<Camera>();
         if (playerCamera == null)
@@ -51,5 +52,6 @@ public class PlayerSetup : MonoBehaviour
             Debug.LogError("PlayerSetup: Missing playerCamera or hudPrefab!");
         }
     }
+
 
 }

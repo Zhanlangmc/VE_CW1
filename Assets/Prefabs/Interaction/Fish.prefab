@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4701037239272799943}
   - component: {fileID: 2878774801719312246}
   - component: {fileID: 4647575776775888088}
-  - component: {fileID: -28047454145077153}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Ball
@@ -278,18 +277,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2586148439552901436, guid: 6e7236bcc7ad8a345bd8203a37806cee, type: 3}
---- !u!114 &-28047454145077153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3828846876288801734}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId:
-    a: 0
-    b: 0

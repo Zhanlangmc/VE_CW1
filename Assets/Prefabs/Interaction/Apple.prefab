@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5217140733525488657}
   - component: {fileID: 1089236219707824553}
   - component: {fileID: 7356707117335375416}
-  - component: {fileID: 1496152467201966458}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Ball
@@ -278,18 +277,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -472147775963580301, guid: 12bf7c0de8c3b5b4bb67f4f585d5a093, type: 3}
---- !u!114 &1496152467201966458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388876489497171537}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId:
-    a: 0
-    b: 0

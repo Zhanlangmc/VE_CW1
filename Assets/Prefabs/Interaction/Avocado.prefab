@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1781724132228705216}
   - component: {fileID: 2419836163644767482}
   - component: {fileID: -8338920802509671372}
-  - component: {fileID: -8223982451177269522}
   m_Layer: 0
   m_Name: Avocado
   m_TagString: Ball
@@ -278,18 +277,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -830171768015006411, guid: 19f66ff944e6f3f428a16e5210fddaea, type: 3}
---- !u!114 &-8223982451177269522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4816721914606352166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId:
-    a: 0
-    b: 0

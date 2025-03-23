@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 5356415310360521406}
   - component: {fileID: 4869519794794399177}
   - component: {fileID: 9169090179012273907}
-  - component: {fileID: 8856469491702925517}
+  - component: {fileID: 184329023775179497}
   m_Layer: 0
   m_Name: LocalHUD
   m_TagString: Untagged
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8856469491702925517
+--- !u!114 &184329023775179497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,11 +354,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4136018800069402796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e861fd8a53773450daa17bbbf9670e49, type: 3}
+  m_Script: {fileID: 11500000, guid: 21b1bb5e43fb5814f8bff5257e62bf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 3492041416407225687}
-  scoreManager: {fileID: 6739114322633758153}
 --- !u!1 &4630789123500511454
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +566,7 @@ GameObject:
   - component: {fileID: 4045134127679449597}
   - component: {fileID: 5233897097310567435}
   - component: {fileID: 6739114322633758153}
-  - component: {fileID: -388091010499074169}
+  - component: {fileID: -4737127084573997344}
   m_Layer: 0
   m_Name: Score_UI_related
   m_TagString: Untagged
@@ -616,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
---- !u!114 &-388091010499074169
+--- !u!114 &-4737127084573997344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -638,7 +637,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6929200533945460196}
-  - component: {fileID: 1234159204906729453}
   - component: {fileID: 2847956400533701456}
   m_Layer: 0
   m_Name: score board
@@ -667,24 +665,6 @@ RectTransform:
   m_AnchoredPosition: {x: 600, y: -600}
   m_SizeDelta: {x: 571.6934, y: 150}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1234159204906729453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918730085123761128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d850c521d533cd4fb7b290a1a3855a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hints:
-  - {fileID: 0}
-  - {fileID: 0}
-  next: {fileID: 2777266786514468293}
-  hide: {fileID: 0}
-  offset: 0
 --- !u!222 &2847956400533701456
 CanvasRenderer:
   m_ObjectHideFlags: 0
