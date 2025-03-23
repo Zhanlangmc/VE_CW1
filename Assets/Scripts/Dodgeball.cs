@@ -186,7 +186,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
                     Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
                     if (shooterScore == null)
                     {
-                        Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
+                        // Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
                     }
                     else
                     {
