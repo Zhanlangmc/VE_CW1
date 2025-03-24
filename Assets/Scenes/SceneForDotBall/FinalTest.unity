@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39543932}
   m_Layer: 0
-  m_Name: Avater
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 39543931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.487052, y: 6.734693, z: 4.647388}
+  m_LocalPosition: {x: 10.632, y: 5.82, z: 9.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1053,27 +1053,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 83
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664494735808812980, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3876263735949466035, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1141,27 +1141,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422156888981319249, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6968544615771611775, guid: d0dac2de4c475406e894f08fc05f878c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1504,7 +1504,7 @@ Transform:
   m_GameObject: {fileID: 349813798}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.43, y: 0, z: 1.94}
   m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5060,29 +5060,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3434539991955462025, guid: 5a3dc97596c6de04bbc7e26c2828b97e, type: 3}
---- !u!1 &1360619218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3217924859190972927, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-  m_PrefabInstance: {fileID: 1778388468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1360619221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5802155942155959053, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
   m_PrefabInstance: {fileID: 1778388468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1360619222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360619218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8705f146903e894b91743a708e15d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!1001 &1363016056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6949,7 +6931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3217924859190972927, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
       propertyPath: m_Name
-      value: Slime 2
+      value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: 5802155942155959053, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6997,12 +6979,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: -7103155235598268117, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
+    - {fileID: -1644804220188862429, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
+    - {fileID: 8331108456463940439, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
+    - {fileID: 6696216062583833534, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
+    - {fileID: 69804870247488752, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
+    - {fileID: 5630416970055084403, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3217924859190972927, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1360619222}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
 --- !u!64 &1795155150
 MeshCollider:

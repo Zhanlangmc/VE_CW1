@@ -639,27 +639,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743039901501322695, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1082635309853141966, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: avatarPrefab
@@ -915,27 +915,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806867407171974117, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6866552682078070656, guid: 73369a530bd8253469d623a3ea6dcff9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3591,24 +3591,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61b71c727ebe74446be4304f95c8d477, type: 3}
---- !u!1 &935592887 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7655189376146235704, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-  m_PrefabInstance: {fileID: 1778388468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &935592890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935592887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8705f146903e894b91743a708e15d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!1001 &946162258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5870,24 +5852,6 @@ Transform:
   - {fileID: 1446726776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1522897178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7965406691884621285, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-  m_PrefabInstance: {fileID: 1778388468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1522897180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522897178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8705f146903e894b91743a708e15d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!1 &1552039621
 GameObject:
   m_ObjectHideFlags: 0
@@ -6200,24 +6164,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3434539991955462025, guid: 5a3dc97596c6de04bbc7e26c2828b97e, type: 3}
---- !u!1 &1638316579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1087304524659842165, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-  m_PrefabInstance: {fileID: 1778388468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1638316581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638316579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8705f146903e894b91743a708e15d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!1 &1645310603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6883,15 +6829,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3217924859190972927, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1360619222}
-    - targetCorrespondingSourceObject: {fileID: 7655189376146235704, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 935592890}
-    - targetCorrespondingSourceObject: {fileID: 1087304524659842165, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1638316581}
-    - targetCorrespondingSourceObject: {fileID: 7965406691884621285, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1522897180}
   m_SourcePrefab: {fileID: 100100000, guid: 33f5258c7c3791945bab9dc45f747264, type: 3}
 --- !u!64 &1795155150
 MeshCollider:

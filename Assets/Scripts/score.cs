@@ -5,7 +5,7 @@
 
 //public class Score : MonoBehaviour, INetworkSpawnable
 //{
-//    // ¸ù¾Ý Ubiq ÒªÇó£¬NetworkId ÓÃÓÚÎ¨Ò»±êÊ¶ÍøÂç¶ÔÏó
+//    // ï¿½ï¿½ï¿½ï¿½ Ubiq Òªï¿½ï¿½NetworkId ï¿½ï¿½ï¿½ï¿½Î¨Ò»ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //    public NetworkId NetworkId { get; set; } = NetworkId.Unique();
 
 //    private NetworkContext context;
@@ -13,7 +13,7 @@
 //    // Start is called once before the first execution of Update after the MonoBehaviour is created
 //    void Start()
 //    {
-//        // ×¢²áµ±Ç°×é¼þµ½ÍøÂç³¡¾°£¬»ñµÃ·¢ËÍºÍ½ÓÊÕÏûÏ¢µÄÉÏÏÂÎÄ
+//        // ×¢ï¿½áµ±Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç³¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ÍºÍ½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //        context = NetworkScene.Register(this);
 //    }
 
@@ -24,17 +24,17 @@
 
 //    private void OnCollisionEnter(Collision collision)
 //    {
-//        // ¼ì²âÅö×²¶ÔÏóÊÇ·ñ±ê¼ÇÎª "Ball"
+//        // ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Îª "Ball"
 //        if (collision.collider.CompareTag("Ball"))
 //        {
-//            // ÀÛ¼Æ·ÖÊý
+//            // ï¿½Û¼Æ·ï¿½ï¿½ï¿½
 //            score++;
 //            Debug.Log("Score: " + score);
 
-//            // Ïú»ÙÇòÌå£¨»ò¸ù¾ÝÐèÇó´¦Àí£¬ÀýÈç·´µ¯»òÌØÐ§£©
+//            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç·´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
 //            Destroy(collision.gameObject);
 
-//            // ¹¹ÔìÏûÏ¢¶ÔÏó£¬½«µ±Ç°·ÖÊýºÍ Avatar µÄ¾Ö²¿ Pose£¨Ïà¶ÔÓÚÍøÂç³¡¾°¸ù½Úµã£©´ò°ü·¢ËÍ
+//            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ó£¬½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Avatar ï¿½Ä¾Ö²ï¿½ Poseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç³¡ï¿½ï¿½ï¿½ï¿½ï¿½Úµã£©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //            Message msg;
 //            msg.score = score;
 //            context.SendJson(msg);
@@ -43,7 +43,7 @@
 //    public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
 //    {
 //        var msg = message.FromJson<Message>();
-//        // ½«½ÓÊÕµ½µÄ¾Ö²¿ Pose ×ª»»ÎªÊÀ½ç×ø±ê
+//        // ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½Ä¾Ö²ï¿½ Pose ×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //        score = msg.score;
 //        Debug.Log("Network update - Score: " + score);
 //    }
@@ -63,16 +63,16 @@ public class Score : MonoBehaviour, INetworkSpawnable
     void Start()
     {
         context = NetworkScene.Register(this);
-        // ×¢²áµ½È«¾Ö ScoreManager£¬·½±ãÔÚÓÎÏ·½áÊøÊ±»ã×Ü
+        // ×¢ï¿½áµ½È«ï¿½ï¿½ ScoreManagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
         ScoreManager.Instance.RegisterScore(this);
         
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
-        // ÀýÈç¼òµ¥Êä³öÏûÏ¢£¬ºóÐøÄã¿ÉÒÔ¸ù¾ÝÐèÒª½âÎöÍøÂçÏûÏ¢
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         Debug.Log("Score received network message.");
-        // Èç¹ûÐèÒªÍ¬²½·ÖÊý£¬Äã¿ÉÒÔÔÚÕâÀïÌí¼Ó½âÎö´úÂë
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÍ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     }
 
@@ -80,7 +80,7 @@ public class Score : MonoBehaviour, INetworkSpawnable
     {
         score += amount;
         Debug.Log("New Score: " + score);
-        Debug.Log($"Íæ¼Ò {gameObject.name}£¨ID: {NetworkId}£©µÄ·ÖÊý¸üÐÂÎª£º{score}");
+        Debug.Log($"ï¿½ï¿½ï¿½ {gameObject.name}ï¿½ï¿½ID: {NetworkId}ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½{score}");
 
     }
 

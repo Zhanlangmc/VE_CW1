@@ -171,12 +171,15 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     }
 
     // 在 Dodgeball 中添加
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // 将原有 Ball 的碰撞逻辑复制到这里
-        if (collision.collider.CompareTag("Player"))
+        // Debug.Log("Tigger!");
+        // if (!thrown || !owner) return; // 只在球已经扔出、并且是本地玩家控制时检测
+
+        if (other.CompareTag("Player"))
         {
-            Score hitScore = collision.collider.GetComponentInParent<Score>();
+            // Debug.Log("Stage1!");
+            Score hitScore = other.GetComponentInParent<Score>();
             if (hitScore != null)
             {
                 Debug.Log($"Ball ownerId: {ownerId}");
@@ -185,21 +188,16 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
                 if (hitScore.NetworkId != ownerId)
                 {
                     Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
-                    if (shooterScore == null)
-                    {
-                        // Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
-                    }
-                    else
-                    {
-                        shooterScore.AddScore(1);
-                    }
+                    shooterScore?.AddScore(1);
                 }
             }
-            // Destroy(gameObject); // No need to destory
+
+            // 可选：执行额外效果，例如粒子、销毁等
+            Destroy(gameObject); // 如果需要销毁
         }
     }
 
-
+    
     private void SendMessage()
     {
         var message = new Message
