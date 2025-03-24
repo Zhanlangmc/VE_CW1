@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 //public class LocalHUDManager : MonoBehaviour
 //{
-//    // Õâ¸ö Text ×é¼şÓÃÓÚÏÔÊ¾±¾µØÍæ¼ÒµÃ·Ö
+//    // è¿™ä¸ª Text ç»„ä»¶ç”¨äºæ˜¾ç¤ºæœ¬åœ°ç©å®¶å¾—åˆ†
 //    public Text scoreText;
-//    // ±¾µØÍæ¼ÒµÄ Score ½Å±¾ÒıÓÃ£¬ĞèÒªÔÚÍæ¼ÒÉú³Éºó¸³Öµ
+//    // æœ¬åœ°ç©å®¶çš„ Score è„šæœ¬å¼•ç”¨ï¼Œéœ€è¦åœ¨ç©å®¶ç”Ÿæˆåèµ‹å€¼
 //    public Score localScore;
 
 
@@ -22,10 +22,10 @@ using UnityEngine.UI;
 
 public class LocalHUDManager : MonoBehaviour
 {
-    public Text scoreText; // ÔÚ Inspector ÖĞÍÏÈë LocalHUD ÖĞµÄ Text ×é¼ş
+    public Text scoreText; // åœ¨ Inspector ä¸­æ‹–å…¥ LocalHUD ä¸­çš„ Text ç»„ä»¶
     private Score localScore;
 
-    // ´Ë·½·¨ÓÃÓÚ°ó¶¨Íæ¼ÒµÄ Score Êı¾İ
+    // æ­¤æ–¹æ³•ç”¨äºç»‘å®šç©å®¶çš„ Score æ•°æ®
     public void SetPlayer(Score score)
     {
         localScore = score;
@@ -37,12 +37,18 @@ public class LocalHUDManager : MonoBehaviour
         if (scoreText != null && localScore != null)
         {
             scoreText.text = "Score: " + localScore.score;
+            // scoreText.text = "Score: 9";
+            // Debug.Log("Updating HUD: Score = " + localScore.score);
         }
+        //if (localScore != null)
+        //{
+        //    Debug.Log($"å½“å‰ HUD ç»‘å®šçš„ Score å®ä¾‹ï¼š{localScore.gameObject.name}ï¼Œåˆ†æ•°ï¼š{localScore.score}");
+        //}
     }
 
     private void Update()
     {
-        // Ã¿Ö¡¸üĞÂ£¬Èç¹ûÄãÏ£Íû·ÖÊıÊµÊ±¸üĞÂ£¨Ò²¿ÉÒÔÍ¨¹ıÊÂ¼şÇı¶¯£©
+        // æ¯å¸§æ›´æ–°ï¼Œå¦‚æœä½ å¸Œæœ›åˆ†æ•°å®æ—¶æ›´æ–°ï¼ˆä¹Ÿå¯ä»¥é€šè¿‡äº‹ä»¶é©±åŠ¨ï¼‰
         UpdateScoreUI();
     }
 }

@@ -52,6 +52,7 @@
 using UnityEngine;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
+using System;
 
 public class Score : MonoBehaviour, INetworkSpawnable
 {
@@ -64,6 +65,7 @@ public class Score : MonoBehaviour, INetworkSpawnable
         context = NetworkScene.Register(this);
         // 注册到全局 ScoreManager，方便在游戏结束时汇总
         ScoreManager.Instance.RegisterScore(this);
+        
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
@@ -71,14 +73,17 @@ public class Score : MonoBehaviour, INetworkSpawnable
         // 例如简单输出消息，后续你可以根据需要解析网络消息
         Debug.Log("Score received network message.");
         // 如果需要同步分数，你可以在这里添加解析代码
+
     }
 
     public void AddScore(int amount)
     {
         score += amount;
         Debug.Log("New Score: " + score);
-        // 此处可添加网络同步代码
+        Debug.Log($"玩家 {gameObject.name}（ID: {NetworkId}）的分数更新为：{score}");
+
     }
+
 }
 
 

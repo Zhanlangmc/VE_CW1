@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -7073387853688511604}
   - component: {fileID: 9169635725809076617}
   - component: {fileID: 1826275736376292616}
-  - component: {fileID: 5910530270875273399}
   m_Layer: 0
   m_Name: Banana
   m_TagString: Ball
@@ -131,9 +130,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9169635725809076617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +213,7 @@ MonoBehaviour:
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 0
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -278,18 +277,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3216447080179446721, guid: 0a6a2491386b3be489501ed9d6f51b69, type: 3}
---- !u!114 &5910530270875273399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230530226155236490}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a91f5085a684244ad6771e7b0a7b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId:
-    a: 0
-    b: 0

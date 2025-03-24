@@ -4,6 +4,7 @@ using Ubiq.Messaging;
 using Ubiq.Spawning;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 #if XRI_3_0_7_OR_NEWER
 using UnityEngine.XR.Interaction.Toolkit;
 #endif
@@ -14,11 +15,6 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     private NetworkContext context;
     private bool owner = false;
     private bool thrown = false;
-    private Transform targetHand; // 目标手的位置
-    private bool isFlyingToHand = false; // 是否正在吸附到手
-    private float grabStartTime;
-    private const float grabLerpDuration = 0.3f; // 吸附持续时间
-    private const float grabDistanceLimit = 2.0f; // 最大抓取距离
     private XRGrabInteractable grabInteractable;
 
     public NetworkId NetworkId { get; set; }
@@ -41,10 +37,11 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     }
 
     private void Start()
-    {
+    {   
         context = NetworkScene.Register(this);
         grabInteractable.selectEntered.AddListener(OnSelectEntering);
         grabInteractable.selectExited.AddListener(OnRelease);
+
     }
 
     private void Update()
@@ -58,38 +55,57 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         {
             float distance = Vector3.Distance(transform.position, interactor.transform.position);
 
-            if (distance > grabDistanceLimit)
+            if (distance > 2.0f) // 最大抓取距离
             {
                 grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grabInteractable);
-                return; // 立即取消抓取
+                return;
             }
         }
     }
 
 
+
     private void OnSelectEntering(SelectEnterEventArgs eventArgs)
     {
-        Transform hand = eventArgs.interactorObject.transform;
-        float distance = Vector3.Distance(transform.position, hand.position);
+        // [1] 设置吸附动画时间
+        grabInteractable.attachEaseInTime = 0.25f;
 
-        if (distance > grabDistanceLimit)
+        // [2] 通用方式提取 attachTransform
+        Transform attachTransform = eventArgs.interactorObject.GetAttachTransform(grabInteractable);
+
+        if (attachTransform != null)
         {
-            return; // 超出抓取范围，阻止抓取
+            grabInteractable.attachTransform = attachTransform;
+            Debug.Log("[Attach] Set to: " + attachTransform.name);
+        }
+        else
+        {
+            Debug.LogWarning("[Attach] No attachTransform found.");
         }
 
-        isFlyingToHand = true;
-        targetHand = hand;
-        grabStartTime = Time.time;
-        rb.isKinematic = true; // 禁用物理，防止碰撞影响吸附
+        // [3] Haptic
+        SendHapticImpulse(eventArgs.interactorObject, 0.5f, 0.1f);
     }
 
+
+
+    private void SendHapticImpulse(IXRInteractor interactor, float amplitude, float duration)
+    {
+#if XRI_3_0_7_OR_NEWER
+        if (interactor is XRBaseControllerInteractor controllerInteractor)
+        {
+            var controller = controllerInteractor.xrController;
+            controller?.SendHapticImpulse(amplitude, duration);
+        }
+#endif
+    }
+    
     private void OnRelease(SelectExitEventArgs eventArgs)
     {
         if (thrown) return;
 
         thrown = true;
         owner = true;
-        isFlyingToHand = false;
         rb.isKinematic = false; // 重新启用物理
 
         //Transform interactorTransform = eventArgs.interactorObject.transform;
@@ -125,7 +141,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         Transform current = eventArgs.interactorObject.transform;
         while (current != null)
         {
-            Debug.Log("Parent: " + current.name);
+            // Debug.Log("Parent: " + current.name);
             current = current.parent;
         }
 
@@ -142,25 +158,10 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     private void FixedUpdate()
     {
-        if (isFlyingToHand && targetHand != null)
-        {
-            float lerpFactor = (Time.time - grabStartTime) / grabLerpDuration;
-            transform.position = Vector3.Lerp(transform.position, targetHand.position, lerpFactor);
-
-            if (lerpFactor >= 1.0f)
-            {
-                isFlyingToHand = false;
-                rb.isKinematic = false;
-            }
-        }
-
-        if (owner)
-        {
-            SendMessage();
-        }
-
         if (owner && thrown)
         {
+            SendMessage();
+
             if (Time.time > destroyTime)
             {
                 NetworkSpawnManager.Find(this).Despawn(gameObject);
@@ -186,7 +187,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
                     Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
                     if (shooterScore == null)
                     {
-                        Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
+                        // Debug.LogError($"No shooter Score found for ownerId: {ownerId}");
                     }
                     else
                     {
@@ -194,25 +195,30 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
                     }
                 }
             }
-            Destroy(gameObject);
+            // Destroy(gameObject); // No need to destory
         }
     }
 
 
     private void SendMessage()
     {
-        var message = new Message();
-        message.pose = Transforms.ToLocal(transform, context.Scene.transform);
-        message.thrown = thrown;
+        var message = new Message
+        {
+            pose = Transforms.ToLocal(transform, context.Scene.transform),
+            thrown = thrown
+        };
         context.SendJson(message);
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
+        if (owner) return; // 本地拥有则忽略远程同步
+
         var msg = message.FromJson<Message>();
         var pose = Transforms.ToWorld(msg.pose, context.Scene.transform);
         transform.position = pose.position;
         transform.rotation = pose.rotation;
         thrown = msg.thrown;
     }
+
 }
