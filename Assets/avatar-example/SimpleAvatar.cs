@@ -58,11 +58,11 @@ public class SimpleAvatar : MonoBehaviour
             return;
         }
 
-        //if (!pose.valid)
-        //{
-        //    leftHand.gameObject.SetActive(false);
-        //    return;
-        //}
+        if (!pose.valid)
+        {
+            leftHand.gameObject.SetActive(false);
+            return;
+        }
 
         leftHand.gameObject.SetActive(true);
         leftHand.SetPositionAndRotation(pose.value.position, pose.value.rotation);
@@ -75,36 +75,13 @@ public class SimpleAvatar : MonoBehaviour
             return;
         }
 
-        //if (!pose.valid)
-        //{
-        //    rightHand.gameObject.SetActive(false);
-        //    return;
-        //}
+        if (!pose.valid)
+        {
+            rightHand.gameObject.SetActive(false);
+            return;
+        }
 
         rightHand.gameObject.SetActive(true);
         rightHand.SetPositionAndRotation(pose.value.position, pose.value.rotation);
-    }
-
-    private void Update()
-    {
-        if (!Application.isEditor || !Application.isPlaying)
-            return;
-
-        // 模拟手部跟随头部（左侧一点）
-        if (head != null && leftHand != null)
-        {
-            var offset = head.right * -0.4f + Vector3.up * 0.2f + head.forward * 0.2f;
-            leftHand.position = head.position + offset;
-            leftHand.rotation = head.rotation;
-        }
-
-        // 同理，右手
-        if (head != null && rightHand != null)
-        {
-            var offset = head.right * 0.4f + Vector3.up * 0.2f + head.forward * 0.2f;
-            rightHand.position = head.position + offset;
-            rightHand.rotation = head.rotation;
-        }
-
     }
 }
