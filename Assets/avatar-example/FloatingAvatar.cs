@@ -85,11 +85,11 @@ public class FloatingAvatar : MonoBehaviour
 
     private void HeadAndHandsEvents_OnLeftHandUpdate(InputVar<Pose> pose)
     {
-        if (!pose.valid)
-        {
-            leftHandRenderer.enabled = false;
-            return;
-        }
+        //if (!pose.valid)
+        //{
+        //    leftHandRenderer.enabled = false;
+        //    return;
+        //}
         
         leftHandRenderer.enabled = true;
         leftHand.position = pose.value.position;
@@ -98,11 +98,11 @@ public class FloatingAvatar : MonoBehaviour
 
     private void HeadAndHandsEvents_OnRightHandUpdate(InputVar<Pose> pose)
     {
-        if (!pose.valid)
-        {
-            rightHandRenderer.enabled = false;
-            return;
-        }
+        //if (!pose.valid)
+        //{
+        //    rightHandRenderer.enabled = false;
+        //    return;
+        //}
 
         rightHandRenderer.enabled = true;
         rightHand.position = pose.value.position;
@@ -119,7 +119,26 @@ public class FloatingAvatar : MonoBehaviour
 
     private void Update()
     {
-        UpdateTorso();
+        if (!Application.isEditor || !Application.isPlaying)
+            return;
+
+        // 模拟手部跟随头部（左侧一点）
+        if (head != null && leftHand != null)
+        {
+            var offset = head.right * -0.3f + Vector3.down * 0.2f;
+            leftHand.position = head.position + offset;
+            leftHand.rotation = head.rotation;
+        }
+
+        // 同理，右手
+        if (head != null && rightHand != null)
+        {
+            var offset = head.right * 0.3f + Vector3.down * 0.2f;
+            rightHand.position = head.position + offset;
+            rightHand.rotation = head.rotation;
+        }
+
+        UpdateTorso(); // 保留 torso 动画
     }
 
     private void UpdateTorso()
