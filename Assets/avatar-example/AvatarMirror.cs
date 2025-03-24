@@ -65,15 +65,35 @@ public class AvatarMirror : MonoBehaviour
             for (int i = 0; i < renderers.Count; i++)
             {
                 var renderer = renderers[i];
-                var filter = renderer.GetComponent<MeshFilter>();
+                //var filter = renderer.GetComponent<MeshFilter>();
                 var rendererTransform = renderer.GetComponent<Transform>();
-                if (!filter)
+                //if (!filter)
+                //{
+                //    // Not all renderers will have meshes - just skip those
+                //    // without.
+                //    continue;
+                //}
+
+                Mesh mesh = null;
+                if (renderer is SkinnedMeshRenderer skinned)
                 {
-                    // Not all renderers will have meshes - just skip those
-                    // without.
+                    mesh = new Mesh();
+                    skinned.BakeMesh(mesh);
+                }
+                else if (renderer is MeshRenderer)
+                {
+                    var filter = renderer.GetComponent<MeshFilter>();
+                    if (filter)
+                    {
+                        mesh = filter.sharedMesh;
+                    }
+                }
+
+                if (mesh == null)
+                {
                     continue;
                 }
-                
+
                 // Manipulate the renderer's transformation matrix to make it 
                 // appear reflected.
                 var mat = renderer.localToWorldMatrix;
@@ -114,7 +134,8 @@ public class AvatarMirror : MonoBehaviour
                 material.SetFloat("_Cull",(int)CullMode.Off);
                 
                 Graphics.DrawMesh(
-                    mesh: filter.mesh,
+                    //mesh: filter.mesh,
+                    mesh: mesh,
                     matrix: mat,
                     material: material,
                     layer: gameObject.layer);

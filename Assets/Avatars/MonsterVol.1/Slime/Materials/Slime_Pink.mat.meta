@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: a1456e8be45a50744b17bc356a6bf3a6
+guid: 85a2f93eb65f5c84aaf7eadadc580c77
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 179910
-  packageName: ATART Monster Slime
-  packageVersion: 1.0
-  assetPath: Assets/ATART/MonsterVol.1/Slime/Materials/Slime_Pink.mat
-  uploadId: 436168
