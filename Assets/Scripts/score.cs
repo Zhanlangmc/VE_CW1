@@ -80,7 +80,7 @@ public class Score : MonoBehaviour, INetworkSpawnable
     {
         score += amount;
         Debug.Log("New Score: " + score);
-        Debug.Log($"��� {gameObject.name}��ID: {NetworkId}���ķ�������Ϊ��{score}");
+        // Debug.Log($"��� {gameObject.name}��ID: {NetworkId}���ķ�������Ϊ��{score}");
 
     }
 

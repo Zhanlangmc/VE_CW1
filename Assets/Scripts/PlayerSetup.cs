@@ -1,57 +1,86 @@
 using UnityEngine;
-using Unity.XR.CoreUtils;
 
 public class PlayerSetup : MonoBehaviour
 {
-
-    public GameObject hudPrefab; // ÔÚ Inspector ÖĞÍÏÈë LocalHUD Ô¤ÖÆÌå
+    public GameObject hudPrefab;
     private GameObject hudInstance;
     private LocalHUDManager hudManager;
     public static Score LocalPlayerScore;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // ¼ÙÉèÍæ¼Ò Avatar ÏÂÓĞ Score ½Å±¾
         Score score = GetComponent<Score>();
-
         if (score != null)
         {
             LocalPlayerScore = score;
         }
 
-        // ²éÕÒÍæ¼ÒµÄÖ÷ÉãÏñ»ú£¨¿ÉÒÔ¸ù¾İÄãµÄ³¡¾°½á¹¹×öµ÷Õû£©
         Camera playerCamera = GetComponentInChildren<Camera>();
         if (playerCamera == null)
         {
-            playerCamera = Camera.main; // ³¢ÊÔ×Ô¶¯²éÕÒÖ÷Ïà»ú
+            playerCamera = Camera.main;
             if (playerCamera == null)
             {
-                Debug.LogError("PlayerSetup: Missing playerCamera! Ensure the scene has a Main Camera.");
+                Debug.LogError("PlayerSetup: No Camera found!");
                 return;
             }
         }
+
         if (hudPrefab == null)
         {
-            Debug.LogError("PlayerSetup: Missing hudPrefab! Please assign a HUD prefab in the inspector.");
+            Debug.LogError("PlayerSetup: HUD prefab is missing.");
             return;
         }
-        if (playerCamera != null && hudPrefab != null)
+
+        // âœ… æ­£ç¡®å®ä¾‹åŒ–å¹¶æ”¾ç½® HUD
+        hudInstance = Instantiate(hudPrefab);
+        hudInstance.name = "LocalHUD (Runtime)";
+        Debug.Log("[HUD] Instantiated");
+        // âœ… ç¡®ä¿æ¿€æ´»
+        hudInstance.SetActive(true);
+        
+        // è®¾ç½® Event Camera
+        Canvas canvas = hudInstance.GetComponentInChildren<Canvas>();
+        if (canvas != null && canvas.renderMode == RenderMode.WorldSpace)
         {
-            // ÔÚÉãÏñ»úÏÂÊµÀı»¯ HUD£¬Ê¹ÆäËæÍæ¼ÒÊÓ½ÇÏÔÊ¾
-            hudInstance = Instantiate(hudPrefab, playerCamera.transform);
-            hudManager = hudInstance.GetComponent<LocalHUDManager>();
-            if (hudManager != null && score != null)
-            {
-                hudManager.SetPlayer(score);
-            }
+            canvas.worldCamera = playerCamera;
+        }
+
+        // âœ… ç¡®ä¿æ¿€æ´»
+        hudInstance.SetActive(true);
+        Debug.Log("[HUD] Activated");
+        
+        // âœ… æ”¾åˆ°æ‘„åƒæœºå‰é¢
+        hudInstance.transform.SetParent(playerCamera.transform);
+        hudInstance.transform.localPosition = new Vector3(0f, 0.0f, 0.5f);
+        hudInstance.transform.localRotation = Quaternion.identity;
+        hudInstance.transform.localScale = Vector3.one * 0.0002f;
+        hudInstance.transform.rotation = Quaternion.LookRotation(playerCamera.transform.forward, Vector3.up);
+        
+        // âœ… ç¡®ä¿æ¿€æ´»
+        hudInstance.SetActive(true);
+        
+        // âœ… åˆå§‹åŒ– HUD
+        hudManager = hudInstance.GetComponent<LocalHUDManager>();
+        if (hudManager != null && score != null)
+        {
+            hudManager.SetPlayer(score);
         }
         else
         {
-            Debug.LogError("PlayerSetup: Missing playerCamera or hudPrefab!");
+            Debug.LogWarning("HUDManager not found or Score missing");
+        }
+        // âœ… ç¡®ä¿æ¿€æ´»
+        hudInstance.SetActive(true);
+    }
+    
+    private void LateUpdate()
+    {
+        if (hudInstance != null && !hudInstance.activeSelf)
+        {
+            Debug.LogWarning("[HUD] Detected disabled â€” re-enabling.");
+            hudInstance.SetActive(true);
         }
     }
-
 
 }

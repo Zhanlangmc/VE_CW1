@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2671981780688911409}
   - component: {fileID: 566374072222249601}
   - component: {fileID: 5445366779282644939}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: -7103155235598268117}
   - component: {fileID: -1644804220188862429}
   - component: {fileID: 5101608449175085115}
+  - component: {fileID: 7071127899995597690}
   m_Layer: 0
   m_Name: SlimeTest
   m_TagString: Untagged
@@ -189,6 +190,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7071127899995597690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217924859190972927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8705f146903e894b91743a708e15d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
 --- !u!1 &6259204617231033493
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +214,7 @@ GameObject:
   - component: {fileID: 4619275155100824457}
   - component: {fileID: 3187324527223558427}
   - component: {fileID: 2464508256425185479}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
