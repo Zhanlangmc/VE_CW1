@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 38a47aca164c2fa45b29733c23465266
+guid: 046a0674061bd224f97e645f80d5a936
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 179910
-  packageName: ATART Monster Slime
-  packageVersion: 1.0
-  assetPath: Assets/ATART/MonsterVol.1/Slime/Materials/Slime_Blue.mat
-  uploadId: 436168

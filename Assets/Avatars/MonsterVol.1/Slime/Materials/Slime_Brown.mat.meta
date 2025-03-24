@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 56e9e93ce6fcb32438109780299033b9
+guid: de32ab8d99eff724f9726ffa59359371
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 179910
-  packageName: ATART Monster Slime
-  packageVersion: 1.0
-  assetPath: Assets/ATART/MonsterVol.1/Slime/Materials/Slime_Brown.mat
-  uploadId: 436168
