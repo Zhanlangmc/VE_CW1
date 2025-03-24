@@ -50,10 +50,16 @@ public class Slime : MonoBehaviour
     IEnumerator DeformMesh(Vector3 impactPoint, Vector3 impactNormal)
     {
         isDeforming = true;
-        float elapsedTime = 0f;
+        float deformDuration = recoverySpeed;  // 凹陷持续时间（越大越慢）
+        float recoverDuration = recoverySpeed;   // 恢复时间
 
-        while (elapsedTime < 1f)
+        float t = 0f;
+
+        // 阶段一：逐步凹陷
+        while (t < deformDuration)
         {
+            float progress = t / deformDuration;
+
             for (int i = 0; i < modifiedVertices.Length; i++)
             {
                 Vector3 worldVertexPos = transform.TransformPoint(originalVertices[i]);
@@ -62,34 +68,53 @@ public class Slime : MonoBehaviour
                 if (distance < deformRadius)
                 {
                     float deformAmount = deformStrength * Mathf.Exp(-distance / deformRadius);
-                    Vector3 localImpactNormal = transform.InverseTransformDirection(impactNormal); // 变换到局部空间
-                    modifiedVertices[i] = originalVertices[i] + localImpactNormal * deformAmount;
+                    Vector3 localImpactNormal = transform.InverseTransformDirection(impactNormal);
+
+                    Vector3 targetPosition = originalVertices[i] + localImpactNormal * deformAmount;
+                    modifiedVertices[i] = Vector3.Lerp(originalVertices[i], targetPosition, progress);
+                }
+                else
+                {
+                    modifiedVertices[i] = originalVertices[i]; // 未受影响的顶点保持不变
                 }
             }
 
             mesh.vertices = modifiedVertices;
             mesh.RecalculateNormals();
 
-            elapsedTime += Time.deltaTime * recoverySpeed;
+            t += Time.deltaTime;
             yield return null;
         }
 
-        // 逐渐恢复形状
-        while (elapsedTime > 0)
+        // 阶段二：逐步恢复
+        t = 0f;
+        while (t < recoverDuration)
         {
+            float progress = t / recoverDuration;
+
             for (int i = 0; i < modifiedVertices.Length; i++)
             {
-                modifiedVertices[i] = Vector3.Lerp(modifiedVertices[i], originalVertices[i], Time.deltaTime * recoverySpeed);
+                modifiedVertices[i] = Vector3.Lerp(modifiedVertices[i], originalVertices[i], progress);
             }
 
             mesh.vertices = modifiedVertices;
             mesh.RecalculateNormals();
 
-            elapsedTime -= Time.deltaTime;
+            t += Time.deltaTime;
             yield return null;
         }
+
+        // 最终归位
+        for (int i = 0; i < modifiedVertices.Length; i++)
+        {
+            modifiedVertices[i] = originalVertices[i];
+        }
+        mesh.vertices = modifiedVertices;
+        mesh.RecalculateNormals();
+
         isDeforming = false;
     }
+
 
     void LateUpdate()
     {
