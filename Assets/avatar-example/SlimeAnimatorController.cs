@@ -3,7 +3,7 @@ using UnityEngine;
 public class SlimeAnimatorController : MonoBehaviour
 {
     public Animator animator;
-    public Transform trackedBody; // Ò»ï¿½ï¿½ï¿½ï¿½ Slime ï¿½ï¿½ Body
+    public Transform trackedBody; // Ò»°ãÊÇ Slime »ò Body
 
     private Vector3 lastPosition;
 
@@ -25,7 +25,7 @@ public class SlimeAnimatorController : MonoBehaviour
 
         float speed = (trackedBody.position - lastPosition).magnitude / Time.deltaTime;
         animator.SetFloat("Speed", speed);
-        //Debug.Log("Speed: " + speed); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+        Debug.Log("Speed: " + speed); // ÐÂÔöÕâÒ»ÐÐ
         lastPosition = trackedBody.position;
     }
 }

@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5802155942155959053}
   - component: {fileID: -7103155235598268117}
+  - component: {fileID: -1644804220188862429}
   - component: {fileID: 8913066584367827941}
+  - component: {fileID: -6061198775098390372}
   m_Layer: 0
   m_Name: Slime 2
   m_TagString: Player
@@ -47,6 +49,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpdateRate: 60
+--- !u!114 &-1644804220188862429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217924859190972927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fe310786a902844b0c95606954b353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  OnHeadUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLeftHandUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRightHandUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLeftGripUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRightGripUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8913066584367827941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +90,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+--- !u!114 &-6061198775098390372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217924859190972927}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a3798442fdcb847bdba3707ee0b30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudPrefab: {fileID: 5752011604686388844, guid: 2bff521e080f5c84db32a4120e9e2d73, type: 3}
 --- !u!1001 &954842491270992340
 PrefabInstance:
   m_ObjectHideFlags: 0
