@@ -84,4 +84,24 @@ public class SimpleAvatar : MonoBehaviour
         rightHand.gameObject.SetActive(true);
         rightHand.SetPositionAndRotation(pose.value.position, pose.value.rotation);
     }
+
+    //private void Update()
+    //{
+    //    if (!Application.isPlaying || avatar == null) return;
+
+    //    // 手距离头部 0.3 左右、稍微低一点、并往前一点（z方向）
+    //    if (head != null && leftHand != null)
+    //    {
+    //        var offset = head.right * -0.3f + Vector3.down * 0.2f + head.forward * 0.2f;
+    //        leftHand.position = head.position + offset;
+    //        leftHand.rotation = head.rotation;
+    //    }
+
+    //    if (head != null && rightHand != null)
+    //    {
+    //        var offset = head.right * 0.3f + Vector3.down * 0.2f + head.forward * 0.2f;
+    //        rightHand.position = head.position + offset;
+    //        rightHand.rotation = head.rotation;
+    //    }
+    //}
 }

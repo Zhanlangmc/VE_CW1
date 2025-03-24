@@ -12,7 +12,9 @@ public class AvatarMirror : MonoBehaviour
              "will be ignored, but the position will represent a point on " +
              "the plane.")]
     public Plane plane;
-    
+
+    public float mirrorScale = 1.0f; // 统一镜像缩放比例
+
     public enum Plane
     {
         XY,
@@ -44,6 +46,11 @@ public class AvatarMirror : MonoBehaviour
         materials = null;
     }
 
+    Vector3 Divide(Vector3 a, Vector3 b)
+    {
+        return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
+    }
+
     private void Update()
     {
         UpdatePlane(out var scaleMultiplier, out var eulerMultiplier);
@@ -53,6 +60,9 @@ public class AvatarMirror : MonoBehaviour
             var avatar = avatarManager.transform.GetChild(ai);
             renderers.Clear();
             avatar.GetComponentsInChildren(includeInactive: false, renderers);
+
+            // 找出主 Renderer（Slime 身体）
+            var rootRenderer = avatar.GetComponentInChildren<SkinnedMeshRenderer>();
 
             foreach (var renderer in renderers)
             {
@@ -109,10 +119,14 @@ public class AvatarMirror : MonoBehaviour
 
                 var mirroredRot = Quaternion.LookRotation(mirroredFwd, mirroredUp);
 
-                // Step 4: 构建变换矩阵（包括缩放）
-                var scaleMatrix = Matrix4x4.Scale(new Vector3(1.0f, 1.0f, 1.0f));
-                var matrix = Matrix4x4.TRS(mirroredPos, mirroredRot, Vector3.one);
-                matrix = matrix * scaleMatrix;
+                // 缩放处理
+                var scale = t.lossyScale;
+                if (renderer == rootRenderer)
+                {
+                    scale *= mirrorScale;
+                }
+
+                var matrix = Matrix4x4.TRS(mirroredPos, mirroredRot, scale);
 
                 // Step 5: 材质复制并禁用剔除
                 if (!materials.TryGetValue(renderer.sharedMaterial, out var material))
