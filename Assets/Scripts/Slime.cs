@@ -4,6 +4,7 @@ using System.Collections;
 public class Slime : MonoBehaviour
 {
     private SkinnedMeshRenderer skinnedMeshRenderer;
+    private MeshCollider meshCollider;
     private Mesh mesh;
     private Vector3[] originalVertices;
     private Vector3[] modifiedVertices;
@@ -13,23 +14,32 @@ public class Slime : MonoBehaviour
     public float deformRadius = 1.0f;    // 形变影响半径
     public float recoverySpeed = 0.5f;   // 形变恢复速度
     public float inside_coeff = 0.2f;   // 嵌入量
-
+    
     void Start()
     {
         // 获取 Skinned Mesh Renderer
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        meshCollider = GetComponentInChildren<MeshCollider>();
         if (skinnedMeshRenderer == null)
         {
             Debug.LogError("No SkinnedMeshRenderer found on " + gameObject.name);
             return;
         }
-
-        // 复制 Mesh，确保可读写
+        // 1. 复制 mesh
         mesh = Instantiate(skinnedMeshRenderer.sharedMesh);
         skinnedMeshRenderer.sharedMesh = mesh;
 
+        // 2. 获取顶点
         originalVertices = mesh.vertices;
         modifiedVertices = mesh.vertices;
+
+        // 3. 最后再绑定 mesh 到 collider
+        if (meshCollider != null)
+        {
+            meshCollider.sharedMesh = null;
+            meshCollider.sharedMesh = mesh;
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -40,7 +50,8 @@ public class Slime : MonoBehaviour
         ContactPoint contact = collision.contacts[0];
         Vector3 impactPoint = contact.point; // 世界坐标系的碰撞点
         Vector3 impactNormal = contact.normal; // 碰撞点的法线方向
-        Debug.Log("Impact point: " + impactPoint + " | Normal: " + impactNormal);
+        Debug.DrawRay(contact.point, contact.normal * 0.5f, Color.red, 2.0f);
+        
         // 修正碰撞点，防止它太靠内
         Vector3 correctedImpactPoint = impactPoint + impactNormal * inside_coeff;
 
@@ -49,6 +60,7 @@ public class Slime : MonoBehaviour
 
     IEnumerator DeformMesh(Vector3 impactPoint, Vector3 impactNormal)
     {
+        Transform meshTransform = skinnedMeshRenderer.transform;
         isDeforming = true;
         float deformDuration = recoverySpeed;  // 凹陷持续时间（越大越慢）
         float recoverDuration = recoverySpeed;   // 恢复时间
@@ -58,11 +70,11 @@ public class Slime : MonoBehaviour
         // 阶段一：逐步凹陷
         while (t < deformDuration)
         {
-            float progress = t / deformDuration;
+            float progress = Mathf.Clamp01(t / deformDuration);
 
             for (int i = 0; i < modifiedVertices.Length; i++)
-            {
-                Vector3 worldVertexPos = transform.TransformPoint(originalVertices[i]);
+            {   
+                Vector3 worldVertexPos = meshTransform.TransformPoint(originalVertices[i]);
                 float distance = Vector3.Distance(worldVertexPos, impactPoint);
 
                 if (distance < deformRadius)
@@ -123,6 +135,12 @@ public class Slime : MonoBehaviour
             mesh.vertices = modifiedVertices;
             mesh.RecalculateNormals();
             skinnedMeshRenderer.sharedMesh = mesh;  // 强制更新 Skinned Mesh Renderer
+        }
+        
+        if (meshCollider != null)
+        {
+            meshCollider.sharedMesh = null;
+            meshCollider.sharedMesh = mesh;
         }
     }
 }
