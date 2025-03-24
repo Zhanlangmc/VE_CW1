@@ -141,7 +141,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         Transform current = eventArgs.interactorObject.transform;
         while (current != null)
         {
-            // Debug.Log("Parent: " + current.name);
+            Debug.Log("Parent: " + current.name);
             current = current.parent;
         }
 
@@ -173,10 +173,10 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     // 在 Dodgeball 中添加
     private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log("Tigger!");
+        Debug.Log("Tigger!");
         // if (!thrown || !owner) return; // 只在球已经扔出、并且是本地玩家控制时检测
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) 
         {
             // Debug.Log("Stage1!");
             Score hitScore = other.GetComponentInParent<Score>();
