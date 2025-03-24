@@ -47,34 +47,17 @@ public class AvatarMirror : MonoBehaviour
     private void Update()
     {
         UpdatePlane(out var scaleMultiplier, out var eulerMultiplier);
-        
-        // Get avatars
+
         for (int ai = 0; ai < avatarManager.transform.childCount; ai++)
         {
             var avatar = avatarManager.transform.GetChild(ai);
-            
-            // Get every renderer on each avatar and queue it up to be rendered
-            // again in the mirror. 
-            // 
-            // Re-use a list for the renderers. New lists need to be cleaned up
-            // by the C# runtime, which is performance intensive and can cause
-            // gameplay hiccups, so we re-use where we can. 
             renderers.Clear();
-            avatar.GetComponentsInChildren(includeInactive:false,renderers);
-            
-            for (int i = 0; i < renderers.Count; i++)
-            {
-                var renderer = renderers[i];
-                //var filter = renderer.GetComponent<MeshFilter>();
-                var rendererTransform = renderer.GetComponent<Transform>();
-                //if (!filter)
-                //{
-                //    // Not all renderers will have meshes - just skip those
-                //    // without.
-                //    continue;
-                //}
+            avatar.GetComponentsInChildren(includeInactive: false, renderers);
 
+            foreach (var renderer in renderers)
+            {
                 Mesh mesh = null;
+
                 if (renderer is SkinnedMeshRenderer skinned)
                 {
                     mesh = new Mesh();
@@ -89,60 +72,64 @@ public class AvatarMirror : MonoBehaviour
                     }
                 }
 
-                if (mesh == null)
+                if (mesh == null) continue;
+
+                var t = renderer.transform;
+
+                // Step 1: 计算镜像平面
+                Vector3 planeNormal;
+                switch (plane)
                 {
-                    continue;
+                    case Plane.XY:
+                        planeNormal = _transform.forward; // Z方向
+                        break;
+                    case Plane.YZ:
+                        planeNormal = _transform.right;   // X方向
+                        break;
+                    default:
+                        planeNormal = _transform.forward;
+                        break;
                 }
 
-                // Manipulate the renderer's transformation matrix to make it 
-                // appear reflected.
-                var mat = renderer.localToWorldMatrix;
+                planeNormal.Normalize();
+                var planePoint = _transform.position;
 
-                // Translate renderer to origin
-                mat = Matrix4x4.Translate(-rendererTransform.position) * mat;
-                
-                // Align with the plane 
-                mat = Matrix4x4.Rotate(Quaternion.Inverse(rendererTransform.rotation)) * mat;
-                
-                // 'Reflect' in the plane
-                mat = Matrix4x4.Scale(scaleMultiplier) * mat;
-                
-                // Return renderer to position, inverting required angles
-                var eul = rendererTransform.rotation.eulerAngles;
-                eul.Scale(eulerMultiplier);
-                mat = Matrix4x4.Rotate(Quaternion.Euler(eul)) * mat;
-                mat = Matrix4x4.Translate(rendererTransform.position) * mat;
-                
-                // Project renderer onto mirror
-                var mirrorToRenderer = rendererTransform.position - _transform.position;
-                var closestPointOnMirror = _transform.position + _transform.right * 
-                    Vector3.Dot(mirrorToRenderer,_transform.right);
-                
-                var toMirror = closestPointOnMirror - rendererTransform.position;
-                toMirror.y = 0;
-                mat = Matrix4x4.Translate(toMirror*2) * mat;
-                
-                // Account for inverted matrix causing inverted winding order by
-                // rendering back and front faces
-                if (!materials.TryGetValue(renderer.sharedMaterial,out var material))
+                // Step 2: 镜像位置 = 源点关于平面的对称点
+                var toPlane = t.position - planePoint;
+                var distance = Vector3.Dot(toPlane, planeNormal);
+                var mirroredPos = t.position - 2 * distance * planeNormal;
+
+                // Step 3: 镜像旋转 = 镜面对旋转的反射
+                var rot = t.rotation;
+                var fwd = rot * Vector3.forward;
+                var up = rot * Vector3.up;
+
+                var mirroredFwd = Vector3.Reflect(fwd, planeNormal);
+                var mirroredUp = Vector3.Reflect(up, planeNormal);
+
+                var mirroredRot = Quaternion.LookRotation(mirroredFwd, mirroredUp);
+
+                // Step 4: 构建变换矩阵（包括缩放）
+                var scaleMatrix = Matrix4x4.Scale(new Vector3(1.0f, 1.0f, 1.0f));
+                var matrix = Matrix4x4.TRS(mirroredPos, mirroredRot, Vector3.one);
+                matrix = matrix * scaleMatrix;
+
+                // Step 5: 材质复制并禁用剔除
+                if (!materials.TryGetValue(renderer.sharedMaterial, out var material))
                 {
                     material = new Material(renderer.sharedMaterial);
-                    materials.Add(renderer.sharedMaterial,material);
+                    materials.Add(renderer.sharedMaterial, material);
                 }
-                
+
                 material.CopyPropertiesFromMaterial(renderer.sharedMaterial);
-                material.SetFloat("_Cull",(int)CullMode.Off);
-                
-                Graphics.DrawMesh(
-                    //mesh: filter.mesh,
-                    mesh: mesh,
-                    matrix: mat,
-                    material: material,
-                    layer: gameObject.layer);
+                material.SetFloat("_Cull", (int)CullMode.Off);
+
+                // Step 6: Draw
+                Graphics.DrawMesh(mesh, matrix, material, gameObject.layer);
             }
         }
     }
-    
+
     private void UpdatePlane( 
         out Vector3 scaleMultiplier, out Vector3 eulerMultiplier)
     {
