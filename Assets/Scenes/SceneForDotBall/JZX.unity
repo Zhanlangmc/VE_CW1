@@ -6105,6 +6105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: 0
+  mirrorScale: 1
 --- !u!114 &1618617140
 MonoBehaviour:
   m_ObjectHideFlags: 0

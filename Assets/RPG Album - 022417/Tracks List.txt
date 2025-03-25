@@ -1,0 +1,17 @@
+	RPG Album - 022417
+	Artist: GWriterStudio
+01.Login-022417
+02.Small Village-022517
+03.Peaceful Forest-022617
+04.First Battle-022717
+05.Middle Town-022817
+06.Deep Cave-030117
+07.Ghost Town-030217
+08.Magical Forest-030217
+09.Harbor-030317
+10.Castle Outpost-030417
+11.In The Castle-030517
+12.Fantasy Garden-030617
+13.Spirit Grave-030717
+14.Final Battle-030817
+15.A travel to Sea-030817

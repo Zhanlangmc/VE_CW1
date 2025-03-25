@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 9c284a16601926144b1f5ae9181780b6
+timeCreated: 1489036495
+licenseType: Store
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 84994
+  packageName: RPG BGM Album - 022417
+  packageVersion: 1.0
+  assetPath: Assets/RPG Album - 022417/mp3 - 320kbps/Small Village-022517.mp3
+  uploadId: 166600
