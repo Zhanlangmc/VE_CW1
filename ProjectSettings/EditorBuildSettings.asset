@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SceneForDotBall/FinalTest.unity
     guid: d8f0971ceeaaaab479dfec03982d74ea
-  - enabled: 1
-    path: Assets/avatar-example/Avatar Example.unity
-    guid: 2e0581e857a80de44a4309c477e7c7d0
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 981afb81e397f394fb99789ab1b85e2a, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 24a74e70fbc34094eb625d24e7cbe8b4, type: 2}
     WebXR.Settings: {fileID: 11400000, guid: 3e6d6e65c32d9bd498d5a03e8590811d, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: b2d430cc2bf637b449d7cad4006306f8, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 668dc1021c16d8240aeb0551613d4853, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 4334956238853d54e87c7c850e87d5e1, type: 2}
   m_UseUCBPForAssetBundles: 0
