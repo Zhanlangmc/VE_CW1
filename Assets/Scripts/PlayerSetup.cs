@@ -1,3 +1,4 @@
+using Ubiq.Avatars;
 using UnityEngine;
 
 public class PlayerSetup : MonoBehaviour
@@ -72,6 +73,8 @@ public class PlayerSetup : MonoBehaviour
         }
         // ✅ 确保激活
         hudInstance.SetActive(true);
+        // ✅ 设置本地 Avatar 为 AvatarSelf Layer
+        SetLocalAvatarLayerToAvatarSelf();
     }
     
     private void LateUpdate()
@@ -80,6 +83,35 @@ public class PlayerSetup : MonoBehaviour
         {
             Debug.LogWarning("[HUD] Detected disabled — re-enabling.");
             hudInstance.SetActive(true);
+        }
+    }
+    
+    private void SetLocalAvatarLayerToAvatarSelf()
+    {
+        AvatarManager manager = FindObjectOfType<AvatarManager>();
+        if (manager == null)
+        {
+            Debug.LogWarning("No AvatarManager found!");
+            return;
+        }
+
+        foreach (Transform child in manager.transform)
+        {
+            if (child.name.StartsWith("My Avatar"))
+            {
+                Debug.Log("Found local avatar: " + child.name);
+                SetLayerRecursively(child.gameObject, LayerMask.NameToLayer("AvatarSelf"));
+                break;
+            }
+        }
+    }
+
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
         }
     }
 
