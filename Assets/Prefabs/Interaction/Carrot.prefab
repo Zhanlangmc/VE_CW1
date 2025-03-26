@@ -279,4 +279,4 @@ MonoBehaviour:
     b: 0
   grabSound: {fileID: 8300000, guid: 3a1b93df067b24be3b5db50f54007e5a, type: 3}
   throwSound: {fileID: 8300000, guid: 6cda087799c3748ff9baf27f077cc9ea, type: 3}
-  soundVolume: 0.5
+  soundVolume: 0.2
