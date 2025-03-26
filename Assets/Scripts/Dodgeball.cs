@@ -24,6 +24,12 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     public NetworkId ownerId;
 
+    // 音效相关
+    public AudioClip grabSound;       // 抓球音效
+    public AudioClip throwSound;      // 扔球音效
+    public float soundVolume = 0.5f;  // 音量
+    private AudioSource audioSource;  // 音频播放器
+
     private struct Message
     {
         public Pose pose;
@@ -67,6 +73,9 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     private void OnSelectEntering(SelectEnterEventArgs eventArgs)
     {
+
+        PlaySound(grabSound);
+
         // [1] 设置吸附动画时间
         grabInteractable.attachEaseInTime = 0.25f;
 
@@ -102,6 +111,8 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     
     private void OnRelease(SelectExitEventArgs eventArgs)
     {
+        PlaySound(throwSound);
+
         if (thrown) return;
 
         thrown = true;
@@ -197,7 +208,17 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         }
     }
 
-    
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.clip = clip;
+            audioSource.volume = soundVolume;
+            audioSource.Play();
+        }
+    }
+
+
     private void SendMessage()
     {
         var message = new Message
