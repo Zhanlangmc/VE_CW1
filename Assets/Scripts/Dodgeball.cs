@@ -40,6 +40,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     {
         rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
