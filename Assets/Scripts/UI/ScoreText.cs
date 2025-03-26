@@ -3,25 +3,25 @@ using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
-    // 引用玩家自己挂在 Avatar 上的 Score 脚本
+    // Reference the player's own Score script on the Avatar
     public Score playerScore;
 
     private Text textComponent;
 
     private void Awake()
     {
-        // 获取挂在当前UI组件上的 Text 组件
+        // Get the Text component attached to the current UI component
         textComponent = GetComponent<Text>();
 
         if (textComponent == null)
         {
-            Debug.LogError("ScoreText 脚本需要挂在带有 Text 组件的 GameObject 上！");
+            Debug.LogError("The ScoreText script needs to be attached to a GameObject with a Text component!");
         }
     }
 
     private void Update()
     {
-        // 每帧更新显示玩家的分数
+        // Update the player's score every frame
         if (playerScore != null && textComponent != null)
         {
             textComponent.text = "Score: " + playerScore.score;

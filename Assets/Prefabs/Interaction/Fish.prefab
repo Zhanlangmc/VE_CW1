@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -255,7 +255,7 @@ MonoBehaviour:
   ownerId:
     a: 0
     b: 0
-  grabSound: {fileID: 8300000, guid: 3a1b93df067b24be3b5db50f54007e5a, type: 3}
+  grabSound: {fileID: 8300000, guid: c45895085ac5446d5a1568ad01064679, type: 3}
   throwSound: {fileID: 8300000, guid: 6cda087799c3748ff9baf27f077cc9ea, type: 3}
   soundVolume: 0.2
 --- !u!64 &4647575776775888088

@@ -5,7 +5,7 @@ public class DodgeballThrow : MonoBehaviour
 {
     private Rigidbody rb;
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-    [SerializeField] private float throwingForce = 1.5f; // 投掷力度，可以在Inspector里调整
+    [SerializeField] private float throwingForce = 1.5f; // Throwing force
 
     private void Awake()
     {
@@ -28,9 +28,9 @@ public class DodgeballThrow : MonoBehaviour
         Rigidbody handRb = args.interactorObject.transform.GetComponent<Rigidbody>();
         if (handRb != null)
         {
-            // 计算投掷方向：使用手的朝向，并结合原始速度
+            // Calculate throwing direction: Use hand orientation, combined with raw velocity
             Vector3 throwDirection = args.interactorObject.transform.forward; 
-            rb.linearVelocity = throwDirection * throwingForce + handRb.linearVelocity; // 结合控制器速度
+            rb.linearVelocity = throwDirection * throwingForce + handRb.linearVelocity; // Combined controller speed
             rb.angularVelocity = handRb.angularVelocity;
         }
     }

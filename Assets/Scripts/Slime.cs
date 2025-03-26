@@ -10,31 +10,37 @@ public class Slime : MonoBehaviour
     private Vector3[] modifiedVertices;
     private bool isDeforming = false;
 
-    public float deformStrength = 1.0f;  // 形变幅度
-    public float deformRadius = 1.0f;    // 形变影响半径
-    public float recoverySpeed = 0.5f;   // 形变恢复速度
-    public float inside_coeff = 0.0f;   // 嵌入量
-    
+    public float deformStrength = 1.0f;  // Intensity of deformation
+    public float deformRadius = 1.0f;    // Radius of deformation effect
+    public float recoverySpeed = 0.5f;   // Speed at which the slime returns to its original shape
+    public float inside_coeff = 0.0f;   // Adjusts the impact point based on penetration
+
+    // Audio settings
+    public AudioClip hitSound;             // Sound to play when the slime is hit
+    public float soundVolume = 0.1f;       // Sound volume
+    private AudioSource audioSource;       // Audio source for sound playback
+
     void Start()
     {
         // 获取 Skinned Mesh Renderer
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         meshCollider = GetComponentInChildren<MeshCollider>();
-        
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         if (skinnedMeshRenderer == null)
         {
             Debug.LogError("No SkinnedMeshRenderer found on " + gameObject.name);
             return;
         }
-        // 1. 复制 mesh
+        // Instantiate the mesh to ensure no original mesh is modified
         mesh = Instantiate(skinnedMeshRenderer.sharedMesh);
         skinnedMeshRenderer.sharedMesh = mesh;
 
-        // 2. 获取顶点
+        // Retrieve original and modified vertices
         originalVertices = mesh.vertices;
         modifiedVertices = mesh.vertices;
 
-        // 3. 最后再绑定 mesh 到 collider
+        // Update the mesh collider
         if (meshCollider != null)
         {
             meshCollider.sharedMesh = null;
@@ -45,15 +51,17 @@ public class Slime : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Ball")) return; // 只响应被 dodgeball 击中（按需设置 Tag）
+        if (!other.CompareTag("Ball")) return; // Only respond to objects with the "Ball" tag
 
-        // 获取 impact 点和方向（估算）
-        Vector3 impactPoint = meshCollider.ClosestPoint(other.transform.position); // 最接近撞击点
-        Vector3 direction = (impactPoint - other.transform.position).normalized; // 估算法线
+        // Calculate the impact point and its direction
+        Vector3 impactPoint = meshCollider.ClosestPoint(other.transform.position);
+        Vector3 direction = (impactPoint - other.transform.position).normalized;
         Vector3 correctedImpactPoint = impactPoint + direction * inside_coeff;
 
         // Debug.DrawRay(impactPoint, direction * 0.5f, Color.red, 1.5f);
         // Debug.Log("[TriggerHit] From: " + other.name + " at " + impactPoint);
+
+        PlaySound(hitSound);
 
         StartCoroutine(DeformMesh(correctedImpactPoint, direction));
     }
@@ -67,7 +75,7 @@ public class Slime : MonoBehaviour
 
         float t = 0f;
 
-        // 阶段一：凹陷
+        // Deformation
         while (t < deformDuration)
         {
             float progress = Mathf.Clamp01(t / deformDuration);
@@ -97,7 +105,7 @@ public class Slime : MonoBehaviour
             yield return null;
         }
 
-        // 阶段二：恢复
+        // Recovery
         t = 0f;
         while (t < recoverDuration)
         {
@@ -115,7 +123,7 @@ public class Slime : MonoBehaviour
             yield return null;
         }
 
-        // 完全恢复
+        // Ensure the mesh fully recovers to its original state
         for (int i = 0; i < modifiedVertices.Length; i++)
         {
             modifiedVertices[i] = originalVertices[i];
@@ -126,6 +134,15 @@ public class Slime : MonoBehaviour
         isDeforming = false;
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.clip = clip;
+            audioSource.volume = soundVolume;
+            audioSource.Play();
+        }
+    }
 
     void LateUpdate()
     {

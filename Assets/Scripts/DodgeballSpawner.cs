@@ -8,14 +8,14 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class DodgeballSpawner : MonoBehaviour
 {
-    public GameObject dodgeballPrefab; // 预制体
-    public float spawnInterval = 10f;  // 每 10 秒生成一个 Dodgeball
-    public float destoryInterval = 10f;  // 每 10 秒生成一个 Dodgeball
-    private NetworkSpawnManager spawnManager; // Ubiq 生成管理器
+    public GameObject dodgeballPrefab;
+    public float spawnInterval = 10f;
+    public float destoryInterval = 10f;
+    private NetworkSpawnManager spawnManager;
 
     private void Start()
     {
-        // 查找 Ubiq 网络生成管理器
+        // Finding Ubiq Network Spawn Manager
         spawnManager = NetworkSpawnManager.Find(this);
         if (spawnManager == null)
         {
@@ -43,11 +43,11 @@ public class DodgeballSpawner : MonoBehaviour
             return;
         }
 
-        // 生成 Dodgeball，并同步到所有玩家
+        // Spawn Dodgeball and sync it to all players
         GameObject dodgeball = spawnManager.SpawnWithPeerScope(dodgeballPrefab);
         if (dodgeball != null)
         {
-            dodgeball.transform.position = transform.position; // 生成位置
+            dodgeball.transform.position = transform.position; // Generated location
             StartCoroutine(DestroyDodgeballAfterTime(dodgeball, destoryInterval));
         }
     }
@@ -58,7 +58,7 @@ public class DodgeballSpawner : MonoBehaviour
 
         if (dodgeball != null)
         {
-            spawnManager.Despawn(dodgeball); // 确保所有客户端同步销毁 Dodgeball
+            spawnManager.Despawn(dodgeball); // Make sure all clients destroy Dodgeball synchronously
         }
     }
 }

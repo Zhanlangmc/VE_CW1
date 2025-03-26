@@ -19,16 +19,16 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     public NetworkId NetworkId { get; set; }
 
-    [SerializeField] private float throwingForce = 1.5f; // 投掷力度
+    [SerializeField] private float throwingForce = 1.5f; // Throwing force
     private float destroyTime;
 
     public NetworkId ownerId;
 
-    // 音效相关
-    public AudioClip grabSound;       // 抓球音效
-    public AudioClip throwSound;      // 扔球音效
-    public float soundVolume = 0.5f;  // 音量
-    private AudioSource audioSource;  // 音频播放器
+    // Audio settings
+    public AudioClip grabSound;
+    public AudioClip throwSound;
+    public float soundVolume = 0.1f;
+    private AudioSource audioSource;
 
     private struct Message
     {
@@ -53,7 +53,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     private void Update()
     {
-        CheckGrabDistance(); // 在每帧检查抓取距离
+        CheckGrabDistance(); // Check grab distance at each frame
     }
 
     private void CheckGrabDistance()
@@ -62,7 +62,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         {
             float distance = Vector3.Distance(transform.position, interactor.transform.position);
 
-            if (distance > 2.0f) // 最大抓取距离
+            if (distance > 2.0f) // Maximum grabbing distance
             {
                 grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grabInteractable);
                 return;
@@ -75,12 +75,12 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     private void OnSelectEntering(SelectEnterEventArgs eventArgs)
     {
 
-        PlaySound(grabSound);
+        // PlaySound(grabSound);
 
-        // [1] 设置吸附动画时间
+        // Set the adsorption animation time
         grabInteractable.attachEaseInTime = 0.25f;
 
-        // [2] 通用方式提取 attachTransform
+        // Generic way to extract attachTransform
         Transform attachTransform = eventArgs.interactorObject.GetAttachTransform(grabInteractable);
 
         if (attachTransform != null)
@@ -93,7 +93,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
             Debug.LogWarning("[Attach] No attachTransform found.");
         }
 
-        // [3] Haptic
+        // Haptic
         SendHapticImpulse(eventArgs.interactorObject, 0.5f, 0.1f);
     }
 
@@ -118,7 +118,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
         thrown = true;
         owner = true;
-        rb.isKinematic = false; // 重新启用物理
+        rb.isKinematic = false; // Re-enable physics
 
         //Transform interactorTransform = eventArgs.interactorObject.transform;
         //Debug.Log("Interactor Object: " + interactorTransform.name);
@@ -165,7 +165,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
             rb.angularVelocity = handRb.angularVelocity;
         }
 
-        destroyTime = Time.time + 60f; // 60 秒后销毁
+        destroyTime = Time.time + 60f; // Destroyed after 60 seconds
     }
 
     private void FixedUpdate()
@@ -182,11 +182,10 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         }
     }
 
-    // 在 Dodgeball 中添加
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Tigger!");
-        // if (!thrown || !owner) return; // 只在球已经扔出、并且是本地玩家控制时检测
+        // if (!thrown || !owner) return; // Only check if the ball has been thrown and is controlled by the local player
 
         if (other.CompareTag("Player")) 
         {
@@ -204,8 +203,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
                 }
             }
 
-            // 可选：执行额外效果，例如粒子、销毁等
-            Destroy(gameObject); // 如果需要销毁
+            Destroy(gameObject);
         }
     }
 
@@ -232,7 +230,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
-        if (owner) return; // 本地拥有则忽略远程同步
+        if (owner) return; // Ignore remote synchronization if locally owned
 
         var msg = message.FromJson<Message>();
         var pose = Transforms.ToWorld(msg.pose, context.Scene.transform);

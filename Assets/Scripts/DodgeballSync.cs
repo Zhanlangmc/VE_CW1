@@ -24,7 +24,7 @@ public class DodgeballNetworkSync : MonoBehaviour
 
     void Update()
     {
-        // 仅在球的位置或速度发生变化时同步
+        // Sync only when the ball's position or velocity changes
         if (Vector3.Distance(lastPosition, transform.localPosition) > 0.01f || 
             Vector3.Distance(lastVelocity, rb.linearVelocity) > 0.01f)
         {
@@ -43,7 +43,7 @@ public class DodgeballNetworkSync : MonoBehaviour
     {
         var m = message.FromJson<Message>();
 
-        // 只在本地玩家没有控制球时更新
+        // Only updated when the local player is not controlling the ball
         if (!rb.isKinematic)
         {
             transform.localPosition = m.position;

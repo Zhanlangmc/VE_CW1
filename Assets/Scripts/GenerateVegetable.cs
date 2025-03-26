@@ -8,30 +8,30 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GenerateVegetable : MonoBehaviour
 {
-    public float spawnInterval = 10f;    // 每 10 秒生成一个 Dodgeball
-    public float destoryInterval = 10f;  // 每 10 秒销毁一个 Dodgeball
-    private NetworkSpawnManager spawnManager; // Ubiq 生成管理器
+    public float spawnInterval = 10f;    // Spawns a Dodgeball every 10 seconds
+    public float destoryInterval = 10f;  // Destroys a Dodgeball every 10 seconds
+    private NetworkSpawnManager spawnManager; // Ubiq Build Manager
 
     public PrefabCatalogue catalogue;
 
     private void SpawnDodgeball()
     {
-        // 检查生成管理器和目录是否存在
+        // Check if the build manager and directory exist
         if (spawnManager == null || catalogue == null || catalogue.prefabs.Count == 0)
         {
             Debug.LogError("Spawn Manager or Prefab Catalogue is missing or empty!");
             return;
         }
 
-        // 随机选择一个预制体
+        // Randomly select a prefab
         int randomIndex = Random.Range(0, catalogue.prefabs.Count);
         GameObject prefabToSpawn = catalogue.prefabs[randomIndex];
 
-        // 生成 Dodgeball，并同步到所有玩家
+        // Spawn Dodgeball and sync it to all players
         GameObject dodgeball = spawnManager.SpawnWithPeerScope(prefabToSpawn);
         if (dodgeball != null)
         {
-            dodgeball.transform.position = transform.position; // 设置生成位置
+            dodgeball.transform.position = transform.position; // Set the spawn location
             StartCoroutine(DestroyDodgeballAfterTime(dodgeball, destoryInterval));
         }
     }
@@ -68,7 +68,7 @@ public class GenerateVegetable : MonoBehaviour
 
         if (dodgeball != null)
         {
-            spawnManager.Despawn(dodgeball); // 确保所有客户端同步销毁 Dodgeball
+            spawnManager.Despawn(dodgeball); // Make sure all clients destroy Dodgeball synchronously
         }
     }
 }

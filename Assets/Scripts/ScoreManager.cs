@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // 在 Score 脚本 Start() 中调用注册
+    // Call registration in Score script Start()
     public void RegisterScore(Score score)
     {
         if (!scoreDictionary.ContainsKey(score.NetworkId))
@@ -30,13 +30,13 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // 提供一个方法来返回所有注册的 Score（供 GameManager 使用）
+    // Provide a method to return all registered Scores
     public IEnumerable<Score> GetAllScores()
     {
         return scoreDictionary.Values;
     }
 
-    // 根据 NetworkId 查找对应的 Score 脚本
+    // Find the corresponding Score script based on NetworkId
     public Score GetScoreByNetworkId(NetworkId id)
     {
         Score s;

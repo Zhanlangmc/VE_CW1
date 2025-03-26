@@ -33,35 +33,34 @@ public class PlayerSetup : MonoBehaviour
             return;
         }
 
-        // ✅ 正确实例化并放置 HUD
+        // Properly instantiating and placing the HUD
         hudInstance = Instantiate(hudPrefab);
         hudInstance.name = "LocalHUD (Runtime)";
         Debug.Log("[HUD] Instantiated");
-        // ✅ 确保激活
+        // Make sure to activate
         hudInstance.SetActive(true);
         
-        // 设置 Event Camera
+        // Set event Camera
         Canvas canvas = hudInstance.GetComponentInChildren<Canvas>();
         if (canvas != null && canvas.renderMode == RenderMode.WorldSpace)
         {
             canvas.worldCamera = playerCamera;
         }
 
-        // ✅ 确保激活
+        // Make sure to activate
         hudInstance.SetActive(true);
         Debug.Log("[HUD] Activated");
-        
-        // ✅ 放到摄像机前面
+
+        // Put it in front of the camera
         hudInstance.transform.SetParent(playerCamera.transform);
         hudInstance.transform.localPosition = new Vector3(0f, 0.0f, 0.5f);
         hudInstance.transform.localRotation = Quaternion.identity;
         hudInstance.transform.localScale = Vector3.one * 0.0002f;
         hudInstance.transform.rotation = Quaternion.LookRotation(playerCamera.transform.forward, Vector3.up);
         
-        // ✅ 确保激活
         hudInstance.SetActive(true);
-        
-        // ✅ 初始化 HUD
+
+        // Initializing the HUD
         hudManager = hudInstance.GetComponent<LocalHUDManager>();
         if (hudManager != null && score != null)
         {
@@ -71,9 +70,8 @@ public class PlayerSetup : MonoBehaviour
         {
             Debug.LogWarning("HUDManager not found or Score missing");
         }
-        // ✅ 确保激活
         hudInstance.SetActive(true);
-        // ✅ 设置本地 Avatar 为 AvatarSelf Layer
+        // Set the local Avatar to AvatarSelf Layer
         SetLocalAvatarLayerToAvatarSelf();
     }
     

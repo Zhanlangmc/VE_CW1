@@ -220,6 +220,8 @@ MonoBehaviour:
   deformRadius: 0.5
   recoverySpeed: 1
   inside_coeff: 0
+  hitSound: {fileID: 8300000, guid: 3a1b93df067b24be3b5db50f54007e5a, type: 3}
+  soundVolume: 0.1
 --- !u!1 &6259204617231033493
 GameObject:
   m_ObjectHideFlags: 0
