@@ -60,9 +60,11 @@ public class Slime : MonoBehaviour
 
         // Debug.DrawRay(impactPoint, direction * 0.5f, Color.red, 1.5f);
         // Debug.Log("[TriggerHit] From: " + other.name + " at " + impactPoint);
-
-        PlaySound(hitSound);
-
+        if (gameObject.layer != LayerMask.NameToLayer("AvatarSelf"))
+        { 
+            PlaySound(hitSound);
+        }
+        
         StartCoroutine(DeformMesh(correctedImpactPoint, direction));
     }
 
