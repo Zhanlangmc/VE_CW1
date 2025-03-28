@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Teleport
   - Ball
+  - Attacher
   layers:
   - Default
   - TransparentFX

@@ -19,12 +19,12 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     public NetworkId NetworkId { get; set; }
 
-    [SerializeField] private float throwingForce = 1.5f; // Throwing force
+    [SerializeField] private float throwingForce = 1.5f;
+    [SerializeField] private float grabDistanceLimit = 1.5f;
     private float destroyTime;
 
     public NetworkId ownerId;
 
-    // Audio settings
     public AudioClip grabSound;
     public AudioClip throwSound;
     public float soundVolume = 0.1f;
@@ -44,16 +44,15 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
     }
 
     private void Start()
-    {   
+    {
         context = NetworkScene.Register(this);
         grabInteractable.selectEntered.AddListener(OnSelectEntering);
         grabInteractable.selectExited.AddListener(OnRelease);
-
     }
 
     private void Update()
     {
-        CheckGrabDistance(); // Check grab distance at each frame
+        CheckGrabDistance(); // 在每帧检查抓取距离
     }
 
     private void CheckGrabDistance()
@@ -62,54 +61,31 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         {
             float distance = Vector3.Distance(transform.position, interactor.transform.position);
 
-            if (distance > 2.0f) // Maximum grabbing distance
+            if (distance > grabDistanceLimit)
             {
                 grabInteractable.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grabInteractable);
-                return;
+                return; // 立即取消抓取
             }
         }
     }
 
-
-
     private void OnSelectEntering(SelectEnterEventArgs eventArgs)
     {
+        Transform hand = eventArgs.interactorObject.transform;
+        float distance = Vector3.Distance(transform.position, hand.position);
 
-        // PlaySound(grabSound);
-
-        // Set the adsorption animation time
-        grabInteractable.attachEaseInTime = 0.25f;
-
-        // Generic way to extract attachTransform
-        Transform attachTransform = eventArgs.interactorObject.GetAttachTransform(grabInteractable);
-
-        if (attachTransform != null)
+        if (distance > grabDistanceLimit)
         {
-            grabInteractable.attachTransform = attachTransform;
-            Debug.Log("[Attach] Set to: " + attachTransform.name);
-        }
-        else
-        {
-            Debug.LogWarning("[Attach] No attachTransform found.");
+            Debug.Log("exceed distance!");
+            return;
         }
 
-        // Haptic
+        thrown = false;
+        owner = true;
+        PlaySound(grabSound);
         SendHapticImpulse(eventArgs.interactorObject, 0.5f, 0.1f);
     }
 
-
-
-    private void SendHapticImpulse(IXRInteractor interactor, float amplitude, float duration)
-    {
-#if XRI_3_0_7_OR_NEWER
-        if (interactor is XRBaseControllerInteractor controllerInteractor)
-        {
-            var controller = controllerInteractor.xrController;
-            controller?.SendHapticImpulse(amplitude, duration);
-        }
-#endif
-    }
-    
     private void OnRelease(SelectExitEventArgs eventArgs)
     {
         PlaySound(throwSound);
@@ -118,62 +94,38 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
         thrown = true;
         owner = true;
-        rb.isKinematic = false; // Re-enable physics
+        rb.isKinematic = false;
 
-        //Transform interactorTransform = eventArgs.interactorObject.transform;
-        //Debug.Log("Interactor Object: " + interactorTransform.name);
-        //Debug.Log("Parent chain:");
-        //Transform current = interactorTransform;
-        //while (current != null)
-        //{
-        //    Debug.Log(" - " + current.name);
-        //    current = current.parent;
-        //}
-
-        //if (PlayerSetup.LocalPlayerScore != null)
-        //{
-        //    ownerId = PlayerSetup.LocalPlayerScore.NetworkId;
-        //    Debug.Log($"Setting ball ownerId to: {ownerId}");
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("PlayerSetup.LocalPlayerScore is null, ownerId not set.");
-        //}
         Score shooterScore = eventArgs.interactorObject.transform.GetComponentInParent<Score>();
         if (shooterScore != null)
         {
             ownerId = shooterScore.NetworkId;
-            Debug.Log($"Setting ball ownerId to: {ownerId}");
-        }
-        else
-        {
-            Debug.LogError("No Score component found on shooter!");
         }
 
-        Transform current = eventArgs.interactorObject.transform;
-        while (current != null)
+#if XRI_3_0_7_OR_NEWER
+        if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
-            Debug.Log("Parent: " + current.name);
-            current = current.parent;
+            var controller = controllerInteractor.xrController;
+            if (controller != null)
+            {
+                rb.linearVelocity = controller.velocity * throwingForce;
+                rb.angularVelocity = controller.angularVelocity;
+            }
         }
+#endif
 
-        Rigidbody handRb = eventArgs.interactorObject.transform.GetComponent<Rigidbody>();
-        if (handRb != null)
-        {
-            Vector3 throwDirection = eventArgs.interactorObject.transform.forward;
-            rb.linearVelocity = throwDirection * throwingForce + handRb.linearVelocity;
-            rb.angularVelocity = handRb.angularVelocity;
-        }
-
-        destroyTime = Time.time + 60f; // Destroyed after 60 seconds
+        destroyTime = Time.time + 60f;
     }
 
     private void FixedUpdate()
     {
-        if (owner && thrown)
+        if (owner)
         {
             SendMessage();
+        }
 
+        if (owner && thrown)
+        {
             if (Time.time > destroyTime)
             {
                 NetworkSpawnManager.Find(this).Despawn(gameObject);
@@ -184,23 +136,18 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Tigger!");
-        // if (!thrown || !owner) return; // Only check if the ball has been thrown and is controlled by the local player
-
-        if (other.CompareTag("Player")) 
+        if (other.gameObject.layer == LayerMask.NameToLayer("AvatarSelf"))
         {
-            // Debug.Log("Stage1!");
-            Score hitScore = other.GetComponentInParent<Score>();
-            if (hitScore != null)
-            {
-                Debug.Log($"Ball ownerId: {ownerId}");
-                Debug.Log($"Hit player's Score.NetworkId: {hitScore.NetworkId}");
+            return;
+        }
 
-                if (hitScore.NetworkId != ownerId)
-                {
-                    Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
-                    shooterScore?.AddScore(1);
-                }
+        if (other.CompareTag("Player"))
+        {
+            Score hitScore = other.GetComponentInParent<Score>();
+            if (hitScore != null && hitScore.NetworkId != ownerId)
+            {
+                Score shooterScore = ScoreManager.Instance.GetScoreByNetworkId(ownerId);
+                shooterScore?.AddScore(1);
             }
 
             Destroy(gameObject);
@@ -217,6 +164,16 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         }
     }
 
+    private void SendHapticImpulse(IXRInteractor interactor, float amplitude, float duration)
+    {
+#if XRI_3_0_7_OR_NEWER
+        if (interactor is XRBaseControllerInteractor controllerInteractor)
+        {
+            var controller = controllerInteractor.xrController;
+            controller?.SendHapticImpulse(amplitude, duration);
+        }
+#endif
+    }
 
     private void SendMessage()
     {
@@ -227,7 +184,7 @@ public class Dodgeball : MonoBehaviour, INetworkSpawnable
         };
         context.SendJson(message);
     }
-
+    
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         if (owner) return; // Ignore remote synchronization if locally owned

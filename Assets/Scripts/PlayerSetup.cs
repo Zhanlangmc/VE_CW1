@@ -106,11 +106,19 @@ public class PlayerSetup : MonoBehaviour
 
     private void SetLayerRecursively(GameObject obj, int layer)
     {
+        if (obj.name == "Left Hand" || obj.name == "Right Hand")
+        {
+            Debug.Log($"Skipping layer set for hand: {obj.name}");
+            return;
+        }
+
         obj.layer = layer;
+
         foreach (Transform child in obj.transform)
         {
             SetLayerRecursively(child.gameObject, layer);
         }
     }
+
 
 }
